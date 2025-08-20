@@ -1,0 +1,26 @@
+{
+  "salaries": [
+    { "label": "Zagreb", "value": 1500 },
+    { "label": "Split", "value": 1300 },
+    { "label": "Rijeka", "value": 1250 },
+    { "label": "Osijek", "value": 1150 },
+    { "label": "Zadar", "value": 1200 },
+    { "label": "Pula", "value": 1180 },
+    { "label": "Slavonski Brod", "value": 1100 },
+    { "label": "Karlovac", "value": 1130 },
+    { "label": "Varaždin", "value": 1220 },
+    { "label": "Šibenik", "value": 1170 }
+  ],
+  "population": [
+    { "label": "Grad Zagreb", "value": 767000 },
+    { "label": "Splitsko-dalmatinska", "value": 455000 },
+    { "label": "Primorsko-goranska", "value": 296000 },
+    { "label": "Osječko-baranjska", "value": 259000 },
+    { "label": "Zadarska", "value": 170000 },
+    { "label": "Istarska", "value": 195000 },
+    { "label": "Brodsko-posavska", "value": 140000 },
+    { "label": "Karlovačka", "value": 120000 },
+    { "label": "Varaždinska", "value": 170000 },
+    { "label": "Šibensko-kninska", "value": 109000 }
+  ]
+}
