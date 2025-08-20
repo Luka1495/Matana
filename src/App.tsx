@@ -227,7 +227,8 @@ const App: React.FC = () => {
                 Sa svakim korakom težimo očuvanju tradicije, promociji
                 održivosti i stvaranju mjesta gdje se svatko osjeća dobrodošlim.
               </p>
-              <p className="font-semibold text-gray-800">
+
+              <p className="mt-20 text-2xl font-bold text-gray-800">
                 Dobrodošli u naš svijet – svijet gdje priroda, tradicija i
                 strast postaju jedno.
               </p>
@@ -290,11 +291,7 @@ const App: React.FC = () => {
               onClick={() => setActiveSection(item.id)}
             >
               {item.logo ? (
-                <img
-                  src={item.logo}
-                  alt={item.label}
-                  className="w-18 h-18 mr-2"
-                />
+                <img src={item.logo} alt={item.label} className="w-30 h-30" />
               ) : (
                 <span className="mr-2">{item.icon}</span>
               )}
@@ -314,7 +311,7 @@ const App: React.FC = () => {
           rel="noopener noreferrer"
           className="text-gray-600 hover:text-pink-500 transition-colors"
         >
-          <FaInstagram size={24} />
+          <FaInstagram size={48} />
         </a>
       </footer>
     </div>
