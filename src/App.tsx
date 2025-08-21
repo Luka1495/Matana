@@ -56,9 +56,6 @@ const App: React.FC = () => {
   const cardStyle =
     "bg-gradient-to-br from-white via-gray-50 to-white shadow-lg rounded-2xl p-6 transition-transform transform hover:scale-105 hover:shadow-2xl";
 
-  const buttonStyle =
-    "bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 text-gray-800 font-semibold py-3 px-6 rounded-full shadow-md hover:shadow-xl transition-all transform hover:scale-105";
-
   const renderContent = () => {
     switch (activeSection) {
       case "lokacija":
