@@ -95,7 +95,7 @@ const App: React.FC = () => {
                   href="https://www.google.com/maps/place/Matana/@45.2082341,17.490116,17z/data=!3m1!4b1!4m6!3m5!1s0x475d8b0042cfe8c3:0xfaa6f3270977ffa2!8m2!3d45.2082303!4d17.4926909!16s%2Fg%2F11vk47vny5?entry=ttu&g_ep=EgoyMDI1MDgxNy4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={buttonStyle}
+                  className="inline-block px-4 py-2 text-lg md:text-xl bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition-all w-full md:w-auto text-center"
                 >
                   🗺️ Otvori u Google Maps
                 </a>
@@ -285,10 +285,6 @@ const App: React.FC = () => {
               <p className="text-xl leading-relaxed font-serif text-gray-700">
                 <strong>Email:</strong> ari.agro.az@gmail.com
               </p>
-              <p className="text-xl leading-relaxed font-serif text-gray-700">
-                <strong>Adresa:</strong> Gornji Crnogovci, Brodsko-posavska
-                županija
-              </p>
             </div>
 
             <div className="mt-8 flex justify-center">
@@ -342,13 +338,13 @@ const App: React.FC = () => {
                 <div className="flex flex-col sm:flex-row justify-center gap-4">
                   <button
                     onClick={() => setActiveSection("ponuda")}
-                    className="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                    className="cursor-pointer border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
                   >
                     Pogledajte našu ponudu
                   </button>
                   <button
                     onClick={() => setActiveSection("kontakt")}
-                    className="border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                    className="cursor-pointer border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
                   >
                     Kontaktirajte nas
                   </button>
@@ -362,7 +358,7 @@ const App: React.FC = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  className={`cursor-pointer w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentSlide
                       ? "bg-white scale-125"
                       : "bg-white bg-opacity-50 hover:bg-opacity-75"
@@ -378,7 +374,7 @@ const App: React.FC = () => {
                   prev === 0 ? slides.length - 1 : prev - 1
                 )
               }
-              className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all duration-300 z-10"
+              className="cursor-pointer absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all duration-300 z-10"
             >
               ‹
             </button>
@@ -386,7 +382,7 @@ const App: React.FC = () => {
               onClick={() =>
                 setCurrentSlide((prev) => (prev + 1) % slides.length)
               }
-              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all duration-300 z-10"
+              className="cursor-pointer absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 text-white text-2xl sm:text-3xl bg-black bg-opacity-30 hover:bg-opacity-50 rounded-full w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center transition-all duration-300 z-10"
             >
               ›
             </button>
@@ -432,7 +428,7 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer - samo ako nije home sekcija */}
-      {activeSection !== "home" && (
+      {activeSection !== "home" && activeSection !== "kontakt" && (
         <footer className="bg-white shadow-inner py-4 flex justify-center">
           <a
             href="https://www.instagram.com/matin_i_anin_stan/profilecard/"
