@@ -60,24 +60,30 @@ const App: React.FC = () => {
     switch (activeSection) {
       case "lokacija":
         return (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-12 text-center">
-            <h2 className="text-5xl font-bold text-gray-800 font-[Playfair Display] mb-12">
+          <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-8 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-gray-800 font-[Playfair Display] mb-6 sm:mb-12">
               LOKACIJA
             </h2>
+
             <div
-              className={`${cardStyle} border border-gray-200 max-w-4xl mx-auto`}
+              className={`${cardStyle} border border-gray-200 max-w-4xl mx-auto p-4 sm:p-8`}
             >
-              <div className="flex items-center justify-center gap-4 mb-6">
-                <span className="text-4xl">📌</span>
-                <h3 className="text-3xl font-[Dancing Script] text-gray-700">
+              {/* Naslov s ikonom */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+                <span className="text-3xl sm:text-4xl">📌</span>
+                <h3 className="text-2xl sm:text-3xl font-[Dancing Script] text-gray-700">
                   Pronađite nas
                 </h3>
               </div>
-              <p className="text-xl leading-relaxed font-serif text-gray-700 mb-6">
+
+              {/* Opis */}
+              <p className="text-base sm:text-xl leading-relaxed font-serif text-gray-700 mb-4 sm:mb-6">
                 Pronađite nas u Slavoniji, Brodsko-posavskoj županiji u mjestu
                 Gornji Crnogovci.
               </p>
-              <div className="mb-6 rounded-xl overflow-hidden shadow-sm h-64 md:h-80">
+
+              {/* Karta */}
+              <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden shadow-sm h-56 sm:h-64 md:h-80">
                 <iframe
                   title="Lokacija - Sala Matana"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2744.6529964664356!2d17.4919137!3d45.2087507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d8b0042cfe8c3%3A0xfaa6f3270977ffa2!2sMatana!5e0!3m2!1shr!2shr!4v1724160000000!5m2!1shr!2shr"
@@ -87,12 +93,14 @@ const App: React.FC = () => {
                   allowFullScreen
                 />
               </div>
+
+              {/* Dugme */}
               <div className="text-center">
                 <a
                   href="https://www.google.com/maps/place/Matana/@45.2082341,17.490116,17z/data=!3m1!4b1!4m6!3m5!1s0x475d8b0042cfe8c3:0xfaa6f3270977ffa2!8m2!3d45.2082303!4d17.4926909!16s%2Fg%2F11vk47vny5?entry=ttu&g_ep=EgoyMDI1MDgxNy4wIKXMDSoASAFQAw%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-4 py-2 text-lg md:text-xl bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition-all w-full md:w-auto text-center"
+                  className="inline-block px-4 py-2 text-base sm:text-lg md:text-xl bg-gray-700 text-white rounded-lg shadow hover:bg-gray-800 transition-all w-full sm:w-auto"
                 >
                   🗺️ Otvori u Google Maps
                 </a>
@@ -103,28 +111,28 @@ const App: React.FC = () => {
 
       case "ponuda":
         return (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-12 text-center">
-            <h2 className="text-5xl font-bold text-gray-800 font-[Playfair Display] mb-12">
+          <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-10 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-gray-800 font-[Playfair Display] mb-6 sm:mb-12">
               PONUDA
             </h2>
-            <p className="mt-20 text-2xl font-bold text-gray-800">
+            <p className="mt-4 sm:mt-8 text-lg sm:text-2xl font-semibold text-gray-800 max-w-2xl mx-auto">
               Dobrodošli u naš svijet – svijet gdje priroda, tradicija i strast
               postaju jedno.
             </p>
 
             {/* Restoran */}
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
               <img
                 src="/images/slika1.jpeg"
                 alt="Restoran"
-                className="w-full rounded-2xl shadow-lg object-cover h-80"
+                className="w-full rounded-2xl shadow-lg object-cover h-60 sm:h-80"
                 loading="lazy"
               />
               <div>
-                <h3 className="text-3xl font-[Dancing Script] text-gray-700 mb-6">
+                <h3 className="text-2xl sm:text-3xl font-[Dancing Script] text-gray-700 mb-4 sm:mb-6">
                   Restoran
                 </h3>
-                <ul className="list-disc list-inside space-y-4 text-left text-xl leading-relaxed font-serif text-gray-700">
+                <ul className="list-disc list-inside space-y-2 sm:space-y-4 text-base sm:text-xl leading-relaxed font-serif text-gray-700 text-left">
                   <li>
                     <strong>Kapacitet:</strong> 80 mjesta
                   </li>
@@ -138,18 +146,18 @@ const App: React.FC = () => {
             </div>
 
             {/* Svečana dvorana */}
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
               <img
                 src="/images/slika2.jpeg"
                 alt="Svečana dvorana"
-                className="w-full rounded-2xl shadow-lg object-cover h-80"
+                className="w-full rounded-2xl shadow-lg object-cover h-60 sm:h-80"
                 loading="lazy"
               />
               <div>
-                <h3 className="text-3xl font-[Dancing Script] text-gray-700 mb-6">
+                <h3 className="text-2xl sm:text-3xl font-[Dancing Script] text-gray-700 mb-4 sm:mb-6">
                   Svečana dvorana
                 </h3>
-                <ul className="list-disc list-inside space-y-4 text-left text-xl leading-relaxed font-serif text-gray-700">
+                <ul className="list-disc list-inside space-y-2 sm:space-y-4 text-base sm:text-xl leading-relaxed font-serif text-gray-700 text-left">
                   <li>
                     <strong>Kapacitet:</strong> 150 mjesta
                   </li>
@@ -163,18 +171,18 @@ const App: React.FC = () => {
             </div>
 
             {/* Poluotvorena terasa */}
-            <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
               <img
                 src="/images/slika3.jpeg"
                 alt="Poluotvorena terasa"
-                className="w-full rounded-2xl shadow-lg object-cover h-80"
+                className="w-full rounded-2xl shadow-lg object-cover h-60 sm:h-80"
                 loading="lazy"
               />
               <div>
-                <h3 className="text-3xl font-[Dancing Script] text-gray-700 mb-6">
+                <h3 className="text-2xl sm:text-3xl font-[Dancing Script] text-gray-700 mb-4 sm:mb-6">
                   Poluotvorena terasa s pogledom na jezero
                 </h3>
-                <ul className="list-disc list-inside space-y-4 text-left text-xl leading-relaxed font-serif text-gray-700">
+                <ul className="list-disc list-inside space-y-2 sm:space-y-4 text-base sm:text-xl leading-relaxed font-serif text-gray-700 text-left">
                   <li>
                     <strong>Kapacitet:</strong> 100 mjesta
                   </li>
@@ -185,28 +193,59 @@ const App: React.FC = () => {
                 </ul>
               </div>
             </div>
+
+            {/* Imanje i dodatni sadržaji */}
+            <div className="bg-gray-50 rounded-2xl p-4 sm:p-8 shadow-inner text-left sm:text-left space-y-4 sm:space-y-6">
+              <h3 className="text-2xl sm:text-3xl font-[Dancing Script] text-gray-700 mb-4 text-center sm:text-center">
+                Imanje i dodatni sadržaji
+              </h3>
+              <ul className="list-disc list-inside space-y-2 sm:space-y-3 text-base sm:text-lg font-serif text-gray-700">
+                <li>
+                  Djeca će obožavati našu ponudu – mogućnost postavljanja
+                  napuhanaca u sigurnom okruženju omogućava im bezbrižnu igru na
+                  svježem zraku. Uz obilje prostora za istraživanje, ovo je
+                  mjesto gdje će mališani doživjeti radost boravka u prirodi.
+                </li>
+                <li>
+                  Uživajte u šetnjama uz jezero, istražite voćnjake ili
+                  pronađite mir u sjenama naše šume. Priroda ovdje pruža ne samo
+                  opuštanje već i priliku za povezivanje sa samim sobom i
+                  najbližima.
+                </li>
+                <li>
+                  Naše jezero s otokom nudi mogućnost pecanja – savršen izbor za
+                  ljubitelje prirode i avanturističkog duha.
+                </li>
+                <li>
+                  Za potpuni doživljaj, smjestite se u jednoj od naših četiri
+                  dvokrevetne sobe s vlastitim kupaonicama, smještenim u
+                  tradicionalnoj slavonskoj kući. Spoj autentičnog šarma i
+                  modernog uređenja osigurava udobnost i jedinstveno iskustvo.
+                </li>
+              </ul>
+            </div>
           </div>
         );
 
       case "o-nama":
         return (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-12">
-            <h2 className="text-5xl font-bold text-gray-800 font-[Playfair Display] mb-12 text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10">
+            <h2 className="text-3xl sm:text-5xl font-bold text-gray-800 font-[Playfair Display] mb-8 sm:mb-12 text-center">
               O NAMA
             </h2>
 
             {/* Uvod */}
-            <section className="space-y-4">
-              <h3 className="text-2xl font-semibold text-gray-700">
+            <section className="space-y-3 sm:space-y-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-700">
                 Naša priča
               </h3>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Od slavonskih polja do dalmatinskog mora, svaki kutak nudi
                 jedinstvenu priču i iskustvo. Naša priča temelji se na
                 dugogodišnjoj predanosti kvaliteti, održivosti i domaćoj
                 proizvodnji.
               </p>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Spoj iskustva i ljubavi prema prirodi rezultirao je stvaranjem
                 jedinstvenog kompleksa koji objedinjuje odmor, zabavu i vrhunsku
                 gastronomiju.
@@ -214,16 +253,16 @@ const App: React.FC = () => {
             </section>
 
             {/* Proizvodi */}
-            <section className="space-y-4">
-              <h3 className="text-2xl font-semibold text-gray-700">
+            <section className="space-y-3 sm:space-y-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-700">
                 Naši proizvodi
               </h3>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Bavimo se ratarskom i stočarskom proizvodnjom, a svi naši
                 proizvodi dolaze s vlastitih polja i farmi, uzgojeni ekološki i
                 na održiv način.
               </p>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Ponosni smo na naš pogon za preradu suhomesnatih proizvoda, čije
                 delicije možete pronaći u našoj mesnici. Svaki proizvod nosi
                 pečat kvalitete i tradicije, pružajući autentičan okus domaće
@@ -232,17 +271,17 @@ const App: React.FC = () => {
             </section>
 
             {/* Ugostiteljstvo i smještaj */}
-            <section className="space-y-4">
-              <h3 className="text-2xl font-semibold text-gray-700">
+            <section className="space-y-3 sm:space-y-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-700">
                 Ugostiteljstvo i smještaj
               </h3>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Restoran Dukat i fast food Dukat u Novoj Gradiški omiljena su
                 mjesta za uživanje u ukusnim jelima. Na našem imanju Anin i
                 Matin stan u Gornjim Crnogovcima nudimo jedinstveni bijeg u
                 prirodu.
               </p>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Za one koji žele spojiti odmor uz more i vrhunsku uslugu,
                 smještaj u Biogradu na Moru idealan je izbor. S opcijama
                 polupansiona i punog pansiona, osigurali smo savršen boravak na
@@ -251,16 +290,16 @@ const App: React.FC = () => {
             </section>
 
             {/* Misija */}
-            <section className="space-y-4">
-              <h3 className="text-2xl font-semibold text-gray-700">
+            <section className="space-y-3 sm:space-y-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-700">
                 Naša misija
               </h3>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Naša misija je stvoriti iskustvo koje se pamti – bilo da se radi
                 o obroku pripremljenom od svježih, domaćih sastojaka,
                 opuštajućoj šetnji prirodom ili nezaboravnom odmoru na moru.
               </p>
-              <p>
+              <p className="text-base sm:text-lg leading-relaxed text-gray-700">
                 Sa svakim korakom težimo očuvanju tradicije, promociji
                 održivosti i stvaranju mjesta gdje se svatko osjeća dobrodošlim.
               </p>
@@ -270,28 +309,28 @@ const App: React.FC = () => {
 
       case "kontakt":
         return (
-          <div className="max-w-4xl mx-auto px-4 py-8 space-y-12 text-center">
-            <h2 className="text-5xl font-bold text-gray-800 font-[Playfair Display] mb-12">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-gray-800 font-[Playfair Display] mb-8 sm:mb-12">
               KONTAKT
             </h2>
 
-            <div className="space-y-6">
-              <p className="text-xl leading-relaxed font-serif text-gray-700">
+            <div className="space-y-4 sm:space-y-6">
+              <p className="text-base sm:text-xl leading-relaxed font-serif text-gray-700">
                 <strong>Telefon:</strong> 091 440 4002 – 091 440 4003
               </p>
-              <p className="text-xl leading-relaxed font-serif text-gray-700">
+              <p className="text-base sm:text-xl leading-relaxed font-serif text-gray-700">
                 <strong>Email:</strong> ari.agro.az@gmail.com
               </p>
             </div>
 
-            <div className="mt-8 flex justify-center">
+            <div className="mt-6 sm:mt-8 flex justify-center">
               <a
                 href="https://www.instagram.com/matin_i_anin_stan/profilecard/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-pink-500 transition-colors"
               >
-                <FaInstagram size={48} />
+                <FaInstagram size={40} className="sm:size-48" />
               </a>
             </div>
           </div>
@@ -393,14 +432,14 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <nav className="bg-white shadow-md p-2 sm:p-4 sticky top-0 z-50">
-        <ul className="flex justify-center gap-2 sm:gap-6 flex-wrap">
+      <nav className="bg-white shadow sticky top-0 z-50">
+        <ul className="flex justify-center flex-wrap gap-1 sm:gap-3 px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base">
           {navigationItems.map((item) => (
             <li
               key={item.id}
-              className={`cursor-pointer px-2 sm:px-3 py-2 rounded-lg text-sm sm:text-base ${
+              className={`cursor-pointer px-2 py-1 sm:px-3 sm:py-2 rounded-md ${
                 activeSection === item.id
-                  ? "bg-gray-200 font-bold"
+                  ? "bg-gray-200 font-semibold"
                   : "hover:bg-gray-100"
               } transition-colors flex items-center`}
               onClick={() => setActiveSection(item.id)}
@@ -409,12 +448,12 @@ const App: React.FC = () => {
                 <img
                   src={item.logo}
                   alt={item.label}
-                  className="w-20 h-20 sm:w-30 sm:h-30"
+                  className="w-6 h-6 sm:w-10 sm:h-10"
                 />
               ) : (
-                <span className="mr-1 sm:mr-2">{item.icon}</span>
+                <span className="mr-1">{item.icon}</span>
               )}
-              {item.label}
+              <span className="hidden sm:inline">{item.label}</span>
             </li>
           ))}
         </ul>
