@@ -63,7 +63,7 @@ const SimpleGallery: React.FC<SimpleGalleryProps> = ({ images }) => {
         )}
 
         {images.length > 1 && (
-          <div className="flex justify-center mt-4 space-x-3">
+          <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
               <button
                 key={index}
