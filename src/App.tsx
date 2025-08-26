@@ -86,7 +86,7 @@ const Gallery: React.FC<GalleryProps> = ({
   description,
   capacity,
   images,
-  reverse = false,
+  reverse = true,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const prevImage = () =>
@@ -161,12 +161,8 @@ const App: React.FC = () => {
     "/images/slika01.jpg",
     "/images/slika02.jpg",
     "/images/slika03.jpg",
-    "/images/slika04.jpg",
-    "/images/slika05.jpg",
-    "/images/slika06.jpg",
     "/images/slika07.jpg",
     "/images/slika08.jpg",
-    "/images/slika09.jpg",
   ];
 
   // Preload slike za bolju performansu
@@ -275,8 +271,8 @@ const App: React.FC = () => {
     switch (activeSection) {
       case "lokacija":
         return (
-          <div className="max-w-4xl mx-auto px-4 py-8 sm:py-12 space-y-8 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-6 sm:mb-12">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12">
               LOKACIJA
             </h2>
             <div className="bg-[#FFF8F0] shadow-xl rounded-2xl p-4 sm:p-8 border border-[#E8DDD3]">
@@ -310,25 +306,27 @@ const App: React.FC = () => {
 
       case "ponuda":
         return (
-          <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12 space-y-8 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-4 sm:mb-6">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif">
               PONUDA
             </h2>
-            <p className="text-lg sm:text-2xl font-medium text-[#7A6A58] max-w-3xl mx-auto leading-relaxed">
-              Dobrodošli u naš svijet – svijet gdje priroda, tradicija i strast
-              postaju jedno.
-            </p>
+            <blockquote className="text-2xl sm:text-3xl italic font-serif text-[#7A6A58] max-w-3xl mx-auto leading-relaxed">
+              “Dobrodošli u naš svijet – svijet gdje priroda, tradicija i strast
+              postaju jedno.”
+            </blockquote>
 
-            <div className="max-w-6xl mx-auto px-4 py-8 sm:py-12">
-              {/* Restoran */}
+            {/* Restoran */}
+            <div className="bg-[#FFF8F0] from-gray-50 to-white rounded-2xl p-6 sm:p-10 shadow-xl border border-[#E8DDD3] mt-12">
               <Gallery
                 title="Restoran"
                 description="Uživajte u autentičnim specijalitetima pripremljenim od svježih i lokalnih sastojaka iz vlastite proizvodnje u ugodnom ambijentu našeg restorana."
                 capacity="80 mjesta"
                 images={["/images/restoran1.jpeg", "/images/restoran2.jpeg"]}
               />
+            </div>
 
-              {/* Svečana dvorana */}
+            {/* Svečana dvorana */}
+            <div className="bg-[#FFF8F0] from-gray-50 to-white rounded-2xl p-6 sm:p-10 shadow-xl border border-[#E8DDD3] mt-12">
               <Gallery
                 title="Svečana dvorana"
                 description="Idealna za vjenčanja, prezentacije, team buildinge i druge svečanosti, ova moderna, zatvorena dvorana osigurava nezaboravno iskustvo."
@@ -342,8 +340,10 @@ const App: React.FC = () => {
                   "/images/dvorana6.jpeg",
                 ]}
               />
+            </div>
 
-              {/* Poluotvorena terasa */}
+            {/* Poluotvorena terasa */}
+            <div className="bg-[#FFF8F0] from-gray-50 to-white rounded-2xl p-6 sm:p-10 shadow-xl border border-[#E8DDD3] mt-12">
               <Gallery
                 title="Poluotvorena terasa s pogledom na jezero"
                 description="Savršena za uživanje na svježem zraku, uz roštilj i mogućnost aktivnog sudjelovanja u pripremi jela."
@@ -357,8 +357,10 @@ const App: React.FC = () => {
                   "/images/otvorenaterasa6.jpeg",
                 ]}
               />
+            </div>
 
-              {/* Kuća za smještaj gostiju */}
+            {/* Kuća za smještaj gostiju */}
+            <div className="bg-[#FFF8F0] from-gray-50 to-white rounded-2xl p-6 sm:p-10 shadow-xl border border-[#E8DDD3] mt-12">
               <Gallery
                 title="Kuća za smještaj gostiju"
                 description="Smjestite se u jednoj od naših četiri dvokrevetne sobe s vlastitim kupaonicama, smještenim u tradicionalnoj slavonskoj kući."
@@ -370,6 +372,7 @@ const App: React.FC = () => {
                 ]}
               />
             </div>
+
             {/* Imanje i dodatni sadrzaj */}
             <div className="bg-[#FFF8F0] from-gray-50 to-white rounded-2xl p-6 sm:p-10 shadow-xl border border-[#E8DDD3] mt-12">
               <h3 className="text-2xl sm:text-3xl font-semibold text-[#7A6A58] mb-6 text-center">
@@ -402,7 +405,7 @@ const App: React.FC = () => {
               </div>
 
               {/* Galerija slika ispod */}
-              <div className="mt-8">
+              <div className="">
                 <SimpleGallery
                   images={[
                     "/images/ostalo01.jpeg",
@@ -424,67 +427,36 @@ const App: React.FC = () => {
 
       case "o-nama":
         return (
-          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12 text-center">
+          <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12">
               O NAMA
             </h2>
 
-            <div className="space-y-8">
-              <section className="bg-[#FFF8F0] rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E8DDD3]">
-                <h3 className="text-xl sm:text-2xl font-semibold text-[#7A6A58] mb-4">
-                  Naša priča
-                </h3>
-                <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
-                  <p>
-                    Od slavonskih polja do dalmatinskog mora, svaki kutak nudi
-                    jedinstvenu priču i iskustvo. Naša priča temelji se na
-                    dugogodišnjoj predanosti kvaliteti, održivosti i domaćoj
-                    proizvodnji.
-                  </p>
-                  <p>
-                    Spoj iskustva i ljubavi prema prirodi rezultirao je
-                    stvaranjem jedinstvenog kompleksa koji objedinjuje odmor,
-                    zabavu i vrhunsku gastronomiju.
-                  </p>
-                </div>
-              </section>
-
-              <section className="bg-[#FFF8F0] rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E8DDD3]">
-                <h3 className="text-xl sm:text-2xl font-semibold text-[#7A6A58] mb-4">
-                  Naši proizvodi
-                </h3>
-                <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
-                  <p>
-                    Bavimo se ratarskom i stočarskom proizvodnjom, a svi naši
-                    proizvodi dolaze s vlastitih polja i farmi, uzgojeni
-                    ekološki i na održiv način.
-                  </p>
-                  <p>
-                    Ponosni smo na naš pogon za preradu suhomesnatih proizvoda,
-                    čije delicije možete pronaći u našoj mesnici. Svaki proizvod
-                    nosi pečat kvalitete i tradicije.
-                  </p>
-                </div>
-              </section>
-
-              <section className="bg-[#FFF8F0] rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E8DDD3]">
-                <h3 className="text-xl sm:text-2xl font-semibold text-[#7A6A58] mb-4">
-                  Naša misija
-                </h3>
-                <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
-                  <p>
-                    Naša misija je stvoriti iskustvo koje se pamti – bilo da se
-                    radi o obroku pripremljenom od svježih, domaćih sastojaka,
-                    opuštajućoj šetnji prirodom ili nezaboravnom odmoru na moru.
-                  </p>
-                  <p>
-                    Sa svakim korakom težimo očuvanju tradicije, promociji
-                    održivosti i stvaranju mjesta gdje se svatko osjeća
-                    dobrodošlim.
-                  </p>
-                </div>
-              </section>
-            </div>
+            <section className="bg-[#FFF8F0] rounded-2xl p-6 sm:p-8 shadow-lg border border-[#E8DDD3] space-y-6">
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#7A6A58] mb-4">
+                Naša priča i misija
+              </h2>
+              <div className="space-y-4 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
+                <p>
+                  Naša priča temelji se na dugogodišnjoj predanosti kvaliteti,
+                  održivosti i domaćoj proizvodnji. Spoj iskustva i ljubavi
+                  prema prirodi rezultirao je stvaranjem jedinstvenog kompleksa
+                  koji objedinjuje odmor, zabavu i vrhunsku gastronomiju.
+                </p>
+                <p>
+                  Bavimo se ratarskom i stočarskom proizvodnjom, a svi naši
+                  proizvodi dolaze s vlastitih polja i farmi, uzgojeni ekološki
+                  i na održiv način.
+                </p>
+                <p>
+                  Naša misija je stvoriti iskustvo koje se pamti – bilo da se
+                  radi o obroku pripremljenom od svježih, domaćih sastojaka ili
+                  opuštajućoj šetnji prirodom. Sa svakim korakom težimo očuvanju
+                  tradicije, promociji održivosti i stvaranju mjesta gdje se
+                  svatko osjeća dobrodošlim.
+                </p>
+              </div>
+            </section>
           </div>
         );
 
@@ -570,20 +542,31 @@ const App: React.FC = () => {
                   okupljanja!
                 </motion.p>
                 <motion.div
-                  className="flex flex-col sm:flex-row justify-center gap-4"
+                  className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center"
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 1, delay: 0.9 }}
                 >
                   <button
                     onClick={() => setActiveSection("ponuda")}
-                    className="cursor-pointer border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                    className="cursor-pointer border-2 border-white text-white 
+               px-4 py-2 text-sm 
+               sm:px-8 sm:py-3 sm:text-base
+               rounded-full font-semibold font-serif 
+               hover:bg-white hover:text-gray-800 
+               transition-all duration-300 transform hover:scale-105"
                   >
                     Pogledajte našu ponudu
                   </button>
+
                   <button
                     onClick={() => setActiveSection("kontakt")}
-                    className="cursor-pointer border-2 border-white text-white px-6 sm:px-8 py-3 rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                    className="cursor-pointer border-2 border-white text-white 
+               px-4 py-2 text-sm 
+               sm:px-8 sm:py-3 sm:text-base
+               rounded-full font-semibold font-serif 
+               hover:bg-white hover:text-gray-800 
+               transition-all duration-300 transform hover:scale-105"
                   >
                     Kontaktirajte nas
                   </button>
