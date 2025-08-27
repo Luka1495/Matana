@@ -241,6 +241,25 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeSection]);
 
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(
+    Array(slides.length).fill(false)
+  );
+
+  // Preload slika i update loadedImages
+  useEffect(() => {
+    slides.forEach((src, index) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        setLoadedImages((prev) => {
+          const copy = [...prev];
+          copy[index] = true;
+          return copy;
+        });
+      };
+    });
+  }, [slides]);
+
   const navigationItems: NavigationItem[] = [
     { id: "lokacija", label: "LOKACIJA", icon: <FaMapPin size={20} /> },
     { id: "ponuda", label: "PONUDA", icon: <FaWineGlassAlt size={20} /> },
@@ -495,25 +514,6 @@ const App: React.FC = () => {
         );
 
       case "home":
-        const [loadedImages, setLoadedImages] = useState<boolean[]>(
-          Array(slides.length).fill(false)
-        );
-
-        // Preload slika i update loadedImages
-        useEffect(() => {
-          slides.forEach((src, index) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = () => {
-              setLoadedImages((prev) => {
-                const copy = [...prev];
-                copy[index] = true;
-                return copy;
-              });
-            };
-          });
-        }, [slides]);
-
         return (
           <div
             {...handlers}
