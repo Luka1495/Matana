@@ -297,9 +297,14 @@ const App: React.FC = () => {
                 href="https://www.google.com/maps/place/Matana/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-6 py-3 text-base sm:text-lg bg-[#7A6A58] text-white rounded-lg shadow-lg hover:bg-[#A9927A] transition-all transform hover:scale-105 w-full sm:w-auto"
+                className="inline-flex items-center px-6 py-3 text-base sm:text-lg bg-[#7A6A58] text-white rounded-lg shadow-lg hover:bg-[#A9927A] transition-all transform hover:scale-105 w-full sm:w-auto"
               >
-                🗺️ Otvori u Google Maps
+                <img
+                  src="/assets/Google_Maps_icon_(2020).svg"
+                  alt="Google Maps"
+                  className="w-6 h-6 mr-2"
+                />
+                Otvori u Google kartama
               </a>
             </div>
           </div>
