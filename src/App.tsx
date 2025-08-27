@@ -3,6 +3,7 @@ import { FaInstagram } from "react-icons/fa";
 import { FaMapPin, FaUsers, FaPhone, FaWineGlassAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useSwipeable } from "react-swipeable";
 
 interface NavigationItem {
   id: string;
@@ -156,6 +157,7 @@ const App: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [overlaySlides, setOverlaySlides] = useState<number[]>([]);
+
   // Lista slika za slideshow
   const slides = [
     "/images/slika01.jpg",
@@ -172,19 +174,6 @@ const App: React.FC = () => {
       img.src = src;
     });
   }, []);
-
-  // Blokira scroll na pocetnoj
-  useEffect(() => {
-    if (activeSection === "home") {
-      window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth",
-      });
-      document.body.style.overflow = "hidden"; // blokira scroll
-    } else {
-      document.body.style.overflow = "auto"; // dopušta scroll
-    }
-  }, [activeSection]);
 
   // Automatski slideshow - mijenja sliku svake 4 sekunde
   useEffect(() => {
@@ -225,9 +214,21 @@ const App: React.FC = () => {
     }, 800);
   };
 
+  // Swipe handler
+  const handlers = useSwipeable({
+    onSwipedLeft: () =>
+      !isTransitioning &&
+      handleSlideChange((prev) => (prev + 1) % slides.length),
+
+    onSwipedRight: () =>
+      !isTransitioning &&
+      handleSlideChange((prev) => (prev - 1 + slides.length) % slides.length),
+
+    trackMouse: true, // omogućava i swipe s mišem na desktopu
+  });
+
   useEffect(() => {
-    if (activeSection != "home")
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [activeSection]);
 
   const navigationItems: NavigationItem[] = [
@@ -514,7 +515,10 @@ const App: React.FC = () => {
 
       case "home":
         return (
-          <div className="relative w-full h-screen overflow-hidden">
+          <div
+            {...handlers}
+            className="relative w-full h-screen overflow-hidden"
+          >
             {/* Slideshow Container */}
             <Slideshow slides={slides} currentSlide={currentSlide} />
 
