@@ -294,7 +294,7 @@ const App: React.FC = () => {
                 />
               </div>
               <a
-                href="https://www.google.com/maps/place/Matana/"
+                href="https://www.google.com/maps/place/Matana/@45.2082341,17.490116,17z/data=!4m6!3m5!1s0x475d8b0042cfe8c3:0xfaa6f3270977ffa2!8m2!3d45.2082303!4d17.4926909!16s%2Fg%2F11vk47vny5?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center px-6 py-3 text-base sm:text-lg bg-[#7A6A58] text-white rounded-lg shadow-lg hover:bg-[#A9927A] transition-all transform hover:scale-105 w-full sm:w-auto"
