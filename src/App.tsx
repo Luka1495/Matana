@@ -273,7 +273,7 @@ const App: React.FC = () => {
       case "lokacija":
         return (
           <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12 mt-8">
               LOKACIJA
             </h2>
             <div className="bg-[#FFF8F0] shadow-xl rounded-2xl p-4 sm:p-8 border border-[#E8DDD3]">
@@ -308,7 +308,7 @@ const App: React.FC = () => {
       case "ponuda":
         return (
           <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12 mt-8">
               PONUDA
             </h2>
             <blockquote className="text-2xl sm:text-3xl italic font-serif text-[#7A6A58] max-w-3xl mx-auto leading-relaxed">
@@ -429,7 +429,7 @@ const App: React.FC = () => {
       case "o-nama":
         return (
           <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12 mt-8">
               O NAMA
             </h2>
 
@@ -464,7 +464,7 @@ const App: React.FC = () => {
       case "kontakt":
         return (
           <div className="max-w-4xl mx-auto px-4 sm:px-8 py-6 sm:py-12 space-y-10 text-center">
-            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12">
+            <h2 className="text-3xl sm:text-5xl font-bold text-[#7A6A58] font-serif mb-8 sm:mb-12 mt-8">
               KONTAKT
             </h2>
 
@@ -603,7 +603,7 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#FFF8F0] flex flex-col">
-      <nav className="sticky top-0 z-50 border-b border-[#E8DDD3] shadow-lg px-4 sm:px-8 py-3 flex items-center justify-center gap-6 sm:gap-12 bg-[#FFF8F0] rounded-b-2xl">
+      <nav className="sticky top-0 z-50 border-b border-[#E8DDD3] shadow-lg px-4 sm:px-8 py-3 flex items-center justify-center gap-6 sm:gap-12 bg-[#FFF8F0] rounded-b-2xl -mt-6">
         <div className="flex items-center justify-center px-4 sm:px-8 py-3 gap-6 sm:gap-12">
           <ul className="flex gap-2 sm:gap-4 text-sm sm:text-base">
             {navigationItems
