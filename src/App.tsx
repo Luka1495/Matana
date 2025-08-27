@@ -534,85 +534,105 @@ const App: React.FC = () => {
         );
 
       case "home":
+        const [imagesLoaded, setImagesLoaded] = useState(false);
+
+        // Preload slika
+        useEffect(() => {
+          let loadedCount = 0;
+          slides.forEach((src) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = () => {
+              loadedCount += 1;
+              if (loadedCount === slides.length) setImagesLoaded(true);
+            };
+          });
+        }, [slides]);
+
         return (
           <div
             {...handlers}
             className="relative w-full h-screen overflow-hidden"
           >
-            {/* Slideshow Container */}
-            <Slideshow slides={slides} currentSlide={currentSlide} />
-
-            {/* Crni overlay */}
-            <div className="absolute inset-0 bg-black/40 z-10"></div>
-
-            {/* Sadržaj preko slike */}
-            <div className="absolute inset-0 flex items-center justify-center z-20 px-4">
-              <div className="text-center max-w-5xl text-white">
-                <motion.h1
-                  className="text-4xl sm:text-6xl md:text-7xl font-bold font-serif mb-6 drop-shadow-lg"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.5 }}
-                >
-                  Dobrodošli na imanje u prirodi
-                </motion.h1>
-                <motion.p
-                  className="text-lg sm:text-xl md:text-2xl mb-8 drop-shadow-md leading-relaxed font-light"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.7 }}
-                >
-                  vaše savršeno odredište za opuštanje, proslave i poslovna
-                  okupljanja!
-                </motion.p>
-                <motion.div
-                  className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, delay: 0.9 }}
-                >
-                  <button
-                    onClick={() => setActiveSection("ponuda")}
-                    className="cursor-pointer border-2 border-white text-white 
-               px-4 py-2 text-sm 
-               sm:px-8 sm:py-3 sm:text-base
-               rounded-full font-semibold font-serif 
-               hover:bg-white hover:text-gray-800 
-               transition-all duration-300 transform hover:scale-105"
-                  >
-                    Pogledajte našu ponudu
-                  </button>
-
-                  <button
-                    onClick={() => setActiveSection("kontakt")}
-                    className="cursor-pointer border-2 border-white text-white 
-               px-4 py-2 text-sm 
-               sm:px-8 sm:py-3 sm:text-base
-               rounded-full font-semibold font-serif 
-               hover:bg-white hover:text-gray-800 
-               transition-all duration-300 transform hover:scale-105"
-                  >
-                    Kontaktirajte nas
-                  </button>
-                </motion.div>
+            {/* Loading overlay */}
+            {!imagesLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center bg-[#CFC2B4] z-30">
+                <p className="text-[#7A6A58] font-serif text-xl">
+                  Učitavanje...
+                </p>
               </div>
-            </div>
+            )}
 
-            {/* Slideshow indikatori */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
-              {slides.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => !isTransitioning && handleSlideChange(index)}
-                  disabled={isTransitioning}
-                  className={`cursor-pointer w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentSlide
-                      ? "bg-[#7A6A58] scale-125"
-                      : "bg-[#CFC2B4] hover:bg-[#A9927A] bg-opacity-50 hover:bg-opacity-75"
-                  } ${isTransitioning ? "cursor-not-allowed" : ""}`}
-                />
-              ))}
-            </div>
+            {imagesLoaded && (
+              <>
+                {/* Slideshow Container */}
+                <Slideshow slides={slides} currentSlide={currentSlide} />
+
+                {/* Crni overlay */}
+                <div className="absolute inset-0 bg-black/40 z-10"></div>
+
+                {/* Sadržaj preko slike */}
+                <div className="absolute inset-0 flex items-center justify-center z-20 px-4">
+                  <div className="text-center max-w-5xl text-white">
+                    <motion.h1
+                      className="text-4xl sm:text-6xl md:text-7xl font-bold font-serif mb-6 drop-shadow-lg"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 0.5 }}
+                    >
+                      Dobrodošli na imanje u prirodi
+                    </motion.h1>
+                    <motion.p
+                      className="text-lg sm:text-xl md:text-2xl mb-8 drop-shadow-md leading-relaxed font-light"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 0.7 }}
+                    >
+                      vaše savršeno odredište za opuštanje, proslave i poslovna
+                      okupljanja!
+                    </motion.p>
+                    <motion.div
+                      className="flex flex-col sm:flex-row gap-3 sm:gap-6 justify-center"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 1, delay: 0.9 }}
+                    >
+                      <button
+                        onClick={() => setActiveSection("ponuda")}
+                        className="cursor-pointer border-2 border-white text-white px-4 py-2 text-sm sm:px-8 sm:py-3 sm:text-base rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                      >
+                        Pogledajte našu ponudu
+                      </button>
+
+                      <button
+                        onClick={() => setActiveSection("kontakt")}
+                        className="cursor-pointer border-2 border-white text-white px-4 py-2 text-sm sm:px-8 sm:py-3 sm:text-base rounded-full font-semibold font-serif hover:bg-white hover:text-gray-800 transition-all duration-300 transform hover:scale-105"
+                      >
+                        Kontaktirajte nas
+                      </button>
+                    </motion.div>
+                  </div>
+                </div>
+
+                {/* Slideshow indikatori */}
+                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
+                  {slides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() =>
+                        !isTransitioning && handleSlideChange(index)
+                      }
+                      disabled={isTransitioning}
+                      className={`cursor-pointer w-3 h-3 rounded-full transition-all duration-300 ${
+                        index === currentSlide
+                          ? "bg-[#7A6A58] scale-125"
+                          : "bg-[#CFC2B4] hover:bg-[#A9927A] bg-opacity-50 hover:bg-opacity-75"
+                      } ${isTransitioning ? "cursor-not-allowed" : ""}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         );
 
