@@ -17,7 +17,6 @@ interface GalleryProps {
   description: string;
   capacity: string;
   images: string[];
-  reverse?: boolean;
 }
 
 interface SimpleGalleryProps {
@@ -87,23 +86,55 @@ const Gallery: React.FC<GalleryProps> = ({
   description,
   capacity,
   images,
-  reverse = true,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Preload svih slika
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+      img.onload = () => setIsLoaded(true);
+    });
+  }, [images]);
+
   const prevImage = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-6">
-      <div className={reverse ? "order-2 lg:order-1 relative" : "relative"}>
+      {/* Tekst */}
+      <div className="order-1 lg:order-2 text-left">
+        <h3 className="text-2xl sm:text-3xl font-semibold text-[#7A6A58] mb-4 sm:mb-6">
+          {title}
+        </h3>
+        <div className="space-y-3 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
+          <p>
+            <strong>Kapacitet:</strong> {capacity}
+          </p>
+          <p>{description}</p>
+        </div>
+      </div>
+
+      {/* Slika */}
+      <div className="relative order-2 lg:order-1">
+        {!isLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-[#CFC2B4] z-20 rounded-2xl">
+            <p className="text-[#7A6A58] font-serif text-lg sm:text-xl">
+              Učitavanje...
+            </p>
+          </div>
+        )}
         <img
           key={currentIndex}
           src={images[currentIndex]}
           alt={title}
-          className="w-full rounded-2xl shadow-xl object-cover h-64 sm:h-80"
+          className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-2xl shadow-xl transition-opacity duration-500"
           loading="lazy"
         />
+
         {images.length > 1 && (
           <>
             <button
@@ -120,6 +151,7 @@ const Gallery: React.FC<GalleryProps> = ({
             </button>
           </>
         )}
+
         {images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -135,18 +167,6 @@ const Gallery: React.FC<GalleryProps> = ({
             ))}
           </div>
         )}
-      </div>
-
-      <div className={reverse ? "order-1 lg:order-2 text-left" : "text-left"}>
-        <h3 className="text-2xl sm:text-3xl font-semibold text-[#7A6A58] mb-4 sm:mb-6">
-          {title}
-        </h3>
-        <div className="space-y-3 text-base sm:text-lg leading-relaxed text-[#7A6A58]">
-          <p>
-            <strong>Kapacitet:</strong> {capacity}
-          </p>
-          <p>{description}</p>
-        </div>
       </div>
     </div>
   );
