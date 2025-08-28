@@ -31,32 +31,37 @@ const SimpleGallery: React.FC<SimpleGalleryProps> = ({ images }) => {
   const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
 
   return (
-    <div className="relative w-full mt-8 flex flex-col items-center">
-      <div className="w-full max-w-4xl mx-auto relative mt-8 px-2 sm:px-0">
+    <div className="relative w-full flex flex-col items-center mt-8">
+      <div className="w-full relative">
         <img
           src={images[currentIndex]}
           alt={`Slika ${currentIndex + 1}`}
-          className="w-full max-h-[60vh] sm:max-h-[80vh] object-contain rounded-2xl shadow-xl mx-auto"
+          className="w-full h-[80dvh] sm:h-auto sm:max-h-[80vh] object-cover sm:object-contain sm:rounded-2xl sm:shadow-xl"
           loading="lazy"
         />
 
+        {/* Navigacijski gumbi */}
         {images.length > 1 && (
           <>
+            {/* Lijevi gumb */}
             <button
               onClick={prevImage}
-              className="cursor-pointer absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
             >
               <FaChevronLeft />
             </button>
+
+            {/* Desni gumb */}
             <button
               onClick={nextImage}
-              className="cursor-pointer absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
             >
               <FaChevronRight />
             </button>
           </>
         )}
 
+        {/* Točkice */}
         {images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -126,7 +131,7 @@ const Gallery: React.FC<GalleryProps> = ({
           key={currentIndex}
           src={images[currentIndex]}
           alt={title}
-          className="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-2xl shadow-xl transition-opacity duration-500"
+          className="w-full h-[50dvh] sm:h-[60dvh] lg:h-96 object-cover rounded-2xl shadow-xl transition-opacity duration-500"
           loading="lazy"
         />
 
@@ -233,8 +238,6 @@ const App: React.FC = () => {
     onSwipedRight: () =>
       !isTransitioning &&
       handleSlideChange((prev) => (prev - 1 + slides.length) % slides.length),
-
-    trackMouse: true, // omogućava i swipe s mišem na desktopu
   });
 
   useEffect(() => {
@@ -286,26 +289,28 @@ const App: React.FC = () => {
               <div className="mb-4 sm:mb-6 rounded-xl overflow-hidden shadow-lg h-56 sm:h-64 md:h-80 bg-[#E8DDD3]">
                 <iframe
                   title="Lokacija - Sala Matana"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2744.6529964664356!2d17.4919137!3d45.2087507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d8b0042cfe8c3%3A0xfaa6f3270977ffa2!2sMatana!5e0!3m2!1shr!2shr!4v1724160000000!5m2!1shr!2shr"
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d106973.84440078905!2d17.427211653668973!3d45.206112860337555!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475d8b0042cfe8c3%3A0xfaa6f3270977ffa2!2sMatana!5e0!3m2!1shr!2shr!4v1756371743005!5m2!1shr!2shr"
                   className="w-full h-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   allowFullScreen
                 />
               </div>
-              <a
-                href="https://www.google.com/maps/place/Matana/@45.2082341,17.490116,17z/data=!4m6!3m5!1s0x475d8b0042cfe8c3:0xfaa6f3270977ffa2!8m2!3d45.2082303!4d17.4926909!16s%2Fg%2F11vk47vny5?entry=ttu&g_ep=EgoyMDI1MDgyNC4wIKXMDSoASAFQAw%3D%3D"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center px-6 py-3 text-base sm:text-lg bg-[#7A6A58] text-white rounded-lg shadow-lg hover:bg-[#A9927A] transition-all transform hover:scale-105 w-full sm:w-auto"
-              >
-                <img
-                  src="/assets/Google_Maps_icon_(2020).svg"
-                  alt="Google Maps"
-                  className="w-6 h-6 mr-2"
-                />
-                Otvori u Google kartama
-              </a>
+              <div className="flex justify-center">
+                <a
+                  href="https://www.google.com/maps/place/Matana/@45.2061129,17.4272117,11.75z/data=!4m6!3m5!1s0x475d8b0042cfe8c3:0xfaa6f3270977ffa2!8m2!3d45.2082303!4d17.4926909!16s%2Fg%2F11vk47vny5?entry=ttu&g_ep=EgoyMDI1MDgyNS4wIKXMDSoASAFQAw%3D%3D"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-6 py-3 text-base sm:text-lg bg-[#7A6A58] text-white rounded-lg shadow-lg hover:bg-[#A9927A] transition-all transform hover:scale-105 sm:w-auto"
+                >
+                  <img
+                    src="/assets/Google_Maps_icon_(2020).svg"
+                    alt="Google Maps"
+                    className="w-6 h-6 mr-2"
+                  />
+                  Otvori u Google kartama
+                </a>
+              </div>
             </div>
           </div>
         );
