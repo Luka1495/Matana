@@ -209,9 +209,11 @@ const App: React.FC = () => {
   }, [activeSection, isTransitioning, slides.length]);
 
   const handleSlideChange = (
-    newSlideOrFunction: number | ((prev: number) => number)
+    newSlideOrFunction: number | ((prev: number) => number),
+    isManual: boolean = false
   ) => {
-    if (isTransitioning) return;
+    // Ako je manualna promjena (klik na tockicu), ne blokiraj
+    if (!isManual && isTransitioning) return;
 
     setIsTransitioning(true);
 
@@ -232,12 +234,13 @@ const App: React.FC = () => {
   // Swipe handler
   const handlers = useSwipeable({
     onSwipedLeft: () =>
-      !isTransitioning &&
-      handleSlideChange((prev) => (prev + 1) % slides.length),
+      handleSlideChange((prev) => (prev + 1) % slides.length, true),
 
     onSwipedRight: () =>
-      !isTransitioning &&
-      handleSlideChange((prev) => (prev - 1 + slides.length) % slides.length),
+      handleSlideChange(
+        (prev) => (prev - 1 + slides.length) % slides.length,
+        true
+      ),
   });
 
   useEffect(() => {
@@ -603,13 +606,12 @@ const App: React.FC = () => {
               {slides.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => !isTransitioning && handleSlideChange(index)}
-                  disabled={isTransitioning}
+                  onClick={() => handleSlideChange(index, true)}
                   className={`cursor-pointer w-3 h-3 rounded-full transition-all duration-300 ${
                     index === currentSlide
                       ? "bg-[#7A6A58] scale-125"
                       : "bg-[#CFC2B4] hover:bg-[#A9927A] bg-opacity-50 hover:bg-opacity-75"
-                  } ${isTransitioning ? "cursor-not-allowed" : ""}`}
+                  }`}
                 />
               ))}
             </div>
