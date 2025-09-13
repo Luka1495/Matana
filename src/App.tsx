@@ -25,14 +25,56 @@ interface SimpleGalleryProps {
 
 const SimpleGallery: React.FC<SimpleGalleryProps> = ({ images }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(
+    Array(images.length).fill(false)
+  );
+
+  // Lazy loading - učitaj samo trenutnu i sljedeću sliku
+  useEffect(() => {
+    const loadImage = (index: number) => {
+      if (!loadedImages[index] && images[index]) {
+        const img = new Image();
+        img.src = images[index];
+        img.onload = () => {
+          setLoadedImages((prev) => {
+            const copy = [...prev];
+            copy[index] = true;
+            return copy;
+          });
+        };
+      }
+    };
+
+    // Učitaj trenutnu sliku
+    loadImage(currentIndex);
+    // Učitaj sljedeću sliku unaprijed
+    const nextIndex = (currentIndex + 1) % images.length;
+    loadImage(nextIndex);
+  }, [currentIndex, images, loadedImages]);
 
   const prevImage = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
 
+  // Swipe handler
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextImage(),
+    onSwipedRight: () => prevImage(),
+    preventScrollOnSwipe: true,
+  });
+
   return (
-    <div className="relative w-full flex flex-col items-center mt-8">
+    <div
+      className="relative w-full flex flex-col items-center mt-8"
+      {...handlers}
+    >
       <div className="w-full relative">
+        {!loadedImages[currentIndex] && (
+          <div className="absolute inset-0 flex items-center justify-center bg-[#CFC2B4] z-20 sm:rounded-2xl">
+            <p className="text-[#7A6A58] font-serif text-lg">Učitavanje...</p>
+          </div>
+        )}
+
         <img
           src={images[currentIndex]}
           alt={`Slika ${currentIndex + 1}`}
@@ -40,23 +82,41 @@ const SimpleGallery: React.FC<SimpleGalleryProps> = ({ images }) => {
           loading="lazy"
         />
 
-        {/* Navigacijski gumbi */}
+        {/* Navigacijski gumbi - skriveni na mobilnim uređajima */}
         {images.length > 1 && (
           <>
-            {/* Lijevi gumb */}
             <button
               onClick={prevImage}
-              className="absolute top-1/2 left-2 sm:left-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="hidden sm:block cursor-pointer absolute top-1/2 left-2 transform -translate-y-1/2 
+             text-white rounded-full p-2 transition-all duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+              }}
             >
-              <FaChevronLeft />
+              <FaChevronLeft size={14} />
             </button>
 
-            {/* Desni gumb */}
             <button
               onClick={nextImage}
-              className="absolute top-1/2 right-2 sm:right-4 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="hidden sm:block cursor-pointer absolute top-1/2 right-2 transform -translate-y-1/2 
+             text-white rounded-full p-2 transition-all duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+              }}
             >
-              <FaChevronRight />
+              <FaChevronRight size={14} />
             </button>
           </>
         )}
@@ -81,6 +141,7 @@ const SimpleGallery: React.FC<SimpleGalleryProps> = ({ images }) => {
     </div>
   );
 };
+
 const Gallery: React.FC<GalleryProps> = ({
   title,
   description,
@@ -88,20 +149,43 @@ const Gallery: React.FC<GalleryProps> = ({
   images,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [loadedImages, setLoadedImages] = useState<boolean[]>(
+    Array(images.length).fill(false)
+  );
 
-  // Preload svih slika
+  // Lazy loading - učitaj samo trenutnu i sljedeću sliku
   useEffect(() => {
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-      img.onload = () => setIsLoaded(true);
-    });
-  }, [images]);
+    const loadImage = (index: number) => {
+      if (!loadedImages[index] && images[index]) {
+        const img = new Image();
+        img.src = images[index];
+        img.onload = () => {
+          setLoadedImages((prev) => {
+            const copy = [...prev];
+            copy[index] = true;
+            return copy;
+          });
+        };
+      }
+    };
+
+    // Učitaj trenutnu sliku
+    loadImage(currentIndex);
+    // Učitaj sljedeću sliku unaprijed
+    const nextIndex = (currentIndex + 1) % images.length;
+    loadImage(nextIndex);
+  }, [currentIndex, images, loadedImages]);
 
   const prevImage = () =>
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   const nextImage = () => setCurrentIndex((prev) => (prev + 1) % images.length);
+
+  // Swipe handler
+  const handlers = useSwipeable({
+    onSwipedLeft: () => nextImage(),
+    onSwipedRight: () => prevImage(),
+    preventScrollOnSwipe: true,
+  });
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mt-6">
@@ -118,40 +202,63 @@ const Gallery: React.FC<GalleryProps> = ({
         </div>
       </div>
 
-      {/* Slika */}
-      <div className="relative order-2 lg:order-1">
-        {!isLoaded && (
+      {/* Slika s swipe funkcionalnostima */}
+      <div className="relative order-2 lg:order-1" {...handlers}>
+        {!loadedImages[currentIndex] && (
           <div className="absolute inset-0 flex items-center justify-center bg-[#CFC2B4] z-20 rounded-2xl">
             <p className="text-[#7A6A58] font-serif text-lg sm:text-xl">
               Učitavanje...
             </p>
           </div>
         )}
+
         <img
-          key={currentIndex}
           src={images[currentIndex]}
-          alt={title}
+          alt={`${title} - slika ${currentIndex + 1}`}
           className="w-full h-[50dvh] sm:h-[60dvh] lg:h-96 object-cover rounded-2xl shadow-xl transition-opacity duration-500"
           loading="lazy"
         />
 
+        {/* Navigacijski gumbi - skriveni na mobilnim uređajima */}
         {images.length > 1 && (
           <>
             <button
               onClick={prevImage}
-              className="cursor-pointer absolute top-1/2 left-2 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="hidden sm:block cursor-pointer absolute top-1/2 left-2 transform -translate-y-1/2 
+             text-white rounded-full p-2 transition-all duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+              }}
             >
-              <FaChevronLeft />
+              <FaChevronLeft size={14} />
             </button>
+
             <button
               onClick={nextImage}
-              className="cursor-pointer absolute top-1/2 right-2 transform -translate-y-1/2 bg-black bg-opacity-30 text-white rounded-full p-2 hover:bg-opacity-50 transition"
+              className="hidden sm:block cursor-pointer absolute top-1/2 right-2 transform -translate-y-1/2 
+             text-white rounded-full p-2 transition-all duration-300"
+              style={{
+                backgroundColor: "rgba(0, 0, 0, 0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "rgba(0, 0, 0, 0.25)";
+              }}
             >
-              <FaChevronRight />
+              <FaChevronRight size={14} />
             </button>
           </>
         )}
 
+        {/* Točkice */}
         {images.length > 1 && (
           <div className="absolute bottom-2 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -176,6 +283,7 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("home");
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
 
   // Lista slika za slideshow
   const slides = [
@@ -186,17 +294,9 @@ const App: React.FC = () => {
     "/images/slika08.jpg",
   ];
 
-  // Preload slike za bolju performansu
-  useEffect(() => {
-    slides.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-  }, []);
-
   // Automatski slideshow - mijenja sliku svake 4 sekunde
   useEffect(() => {
-    if (activeSection !== "home") return;
+    if (activeSection !== "home" || !allImagesLoaded) return;
 
     const interval = setInterval(() => {
       // Promijeni slide samo ako se ne animira
@@ -206,7 +306,7 @@ const App: React.FC = () => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [activeSection, isTransitioning, slides.length]);
+  }, [activeSection, isTransitioning, slides.length, allImagesLoaded]);
 
   const handleSlideChange = (
     newSlideOrFunction: number | ((prev: number) => number),
@@ -253,15 +353,24 @@ const App: React.FC = () => {
 
   // Preload slika i update loadedImages
   useEffect(() => {
+    let loadedCount = 0;
+    const totalImages = slides.length;
+
     slides.forEach((src, index) => {
       const img = new Image();
       img.src = src;
       img.onload = () => {
+        loadedCount++;
         setLoadedImages((prev) => {
           const copy = [...prev];
           copy[index] = true;
           return copy;
         });
+
+        // Kada se sve slike učitaju
+        if (loadedCount === totalImages) {
+          setAllImagesLoaded(true);
+        }
       };
     });
   }, [slides]);
@@ -534,15 +643,21 @@ const App: React.FC = () => {
           >
             {/* Slideshow Container */}
             <div className="w-full h-full relative">
-              <img
-                src={slides[currentSlide]}
-                alt={`Slika ${currentSlide + 1}`}
-                className={`w-full h-full object-cover transition-all duration-700 ${
-                  loadedImages[currentSlide]
-                    ? "blur-0 scale-100"
-                    : "blur-lg scale-105"
-                }`}
-              />
+              {slides.map((slide, index) => (
+                <img
+                  key={index}
+                  src={slide}
+                  alt={`Slika ${index + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${
+                    index === currentSlide
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-105"
+                  } ${loadedImages[index] ? "blur-0" : "blur-lg"}`}
+                  style={{
+                    zIndex: index === currentSlide ? 10 : 1,
+                  }}
+                />
+              ))}
             </div>
 
             {/* Crni overlay */}
