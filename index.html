@@ -1,17 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
   <head>
     <meta charset="UTF-8" />
-    <link
-      rel="shortcut icon"
-      href="/favicon.ico"
-      type="/images/LOGO_MATANA.png"
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Standard Favicon -->
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
 
-    <!-- PNG verzije -->
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
     <link
       rel="icon"
       type="image/png"
@@ -24,15 +19,11 @@
       sizes="32x32"
       href="/images/favicon-32x32.png"
     />
-
-    <!-- Apple iOS ikona -->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
       href="/images/apple-touch-icon.png"
     />
-
-    <!-- Android Chrome -->
     <link
       rel="icon"
       type="image/png"
@@ -45,31 +36,124 @@
       sizes="512x512"
       href="/images/android-chrome-512x512.png"
     />
-
-    <!-- Manifest (PWA podrška) -->
     <link rel="manifest" href="/site.webmanifest" />
-    <title>MATANA | OPG Arić – svečana dvorana</title>
+
+    <!-- SEO Meta tagovi -->
+    <title>
+      Sala Matana - Restoran, Svečana dvorana i Smještaj | Gornji Crnogovci
+    </title>
     <meta
       name="description"
-      content="OPG Arić imanje u prirodi – vaše savršeno odredište za opuštanje, proslave i poslovna okupljanja!."
+      content="Sala Matana u Gornjim Crnogovcima nudi restoran (80 mjesta), svečanu dvoranu (150 mjesta), poluotvorenu terasu s pogledom na jezero (100 mjesta) i smještaj za goste. Idealno za vjenčanja, proslave i poslovna okupljanja."
     />
-    <!-- Open Graph (za društvene mreže) -->
-    <meta property="og:title" content="MATANA | OPG Arić" />
+    <meta
+      name="keywords"
+      content="sala matana, restoran slavonija, svečana dvorana, vjenčanja, proslave, smještaj gornji crnogovci, jezero, brodsko posavska županija, OPG Arić"
+    />
+    <meta name="author" content="OPG Arić - Sala Matana" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph tagovi (za Facebook, WhatsApp dijeljenje) -->
+    <meta
+      property="og:title"
+      content="Sala Matana - Vaše savršeno odredište za proslave"
+    />
     <meta
       property="og:description"
-      content="Domaći proizvodi i tradicija. Svježi proizvodi iz srca Hrvatske."
+      content="Restoran, svečana dvorana, terasa s pogledom na jezero i smještaj u prirodnom okruženju Slavonije. Domaći proizvodi iz vlastite proizvodnje."
     />
     <meta
       property="og:image"
-      content="https://opg-aric.hr/images/LOGO_MATANA.png"
+      content="https://opg-aric.hr/images/slika01.jpg"
     />
-    <meta property="og:type" content="website" />
     <meta property="og:url" content="https://opg-aric.hr" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="hr_HR" />
+    <meta property="og:site_name" content="Sala Matana" />
+
+    <!-- Twitter Card tagovi -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Sala Matana - Restoran i Svečana dvorana"
+    />
+    <meta
+      name="twitter:description"
+      content="Pronađite savršeno mjesto za vašu proslavu u prirodnom okruženju Slavonije."
+    />
+    <meta
+      name="twitter:image"
+      content="https://opg-aric.hr/images/slika01.jpg"
+    />
+
+    <!-- Lokacija i kontakt -->
+    <meta name="geo.region" content="HR-12" />
+    <meta name="geo.placename" content="Gornji Crnogovci" />
+    <meta name="geo.position" content="45.2082303;17.4926909" />
+    <meta name="ICBM" content="45.2082303, 17.4926909" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://opg-aric.hr" />
+
+    <!-- Preload važnih slika za performanse -->
     <link rel="preload" as="image" href="/images/slika01.jpg" />
     <link rel="preload" as="image" href="/images/slika02.jpg" />
     <link rel="preload" as="image" href="/images/slika03.jpg" />
     <link rel="preload" as="image" href="/images/slika07.jpg" />
     <link rel="preload" as="image" href="/images/slika08.jpg" />
+    <link rel="preload" as="image" href="/images/LOGO_MATANA.png" />
+
+    <!-- Schema.org strukturirani podaci -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Sala Matana",
+        "alternateName": "OPG Arić",
+        "description": "Restoran, svečana dvorana i smještaj u prirodnom okruženju Slavonije",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Gornji Crnogovci",
+          "addressRegion": "Brodsko-posavska županija",
+          "addressCountry": "Hrvatska"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "45.2082303",
+          "longitude": "17.4926909"
+        },
+        "telephone": ["091 440 4002", "091 440 4003"],
+        "email": "ari.agro.az@gmail.com",
+        "url": "https://opg-aric.hr",
+        "sameAs": ["https://www.instagram.com/matin_i_anin_stan/profilecard/"],
+        "servesCuisine": "Hrvatska kuhinja",
+        "priceRange": "$$",
+        "amenityFeature": [
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Restoran",
+            "value": "80 mjesta"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Svečana dvorana",
+            "value": "150 mjesta"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Poluotvorena terasa",
+            "value": "100 mjesta"
+          },
+          {
+            "@type": "LocationFeatureSpecification",
+            "name": "Smještaj",
+            "value": "8 mjesta"
+          }
+        ],
+        "hasMenu": true,
+        "acceptsReservations": true
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
